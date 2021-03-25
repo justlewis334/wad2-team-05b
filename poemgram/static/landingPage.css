@@ -1,0 +1,32 @@
+.container-fluid{
+    display: flex;
+	justify-content: left;
+}
+
+.container{
+    display: flex;
+	justify-content: space-evenly;
+}
+
+.row{
+	justify-content: space-evenly;
+}
+
+.vl {
+  border-left: 3px solid black;
+  height: auto;
+}
+
+.panel-jumbotron {
+  border:1 px solid grey;
+  width: 300px;
+  height: 600px;
+  margin: 0 auto
+}
+
+.wide-jumbotron {
+  border:1 px solid grey;
+  width: 600px;
+  height: 600px;
+  margin: 0 auto
+}

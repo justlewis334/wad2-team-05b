@@ -4,5 +4,8 @@ from django.urls import include
 from poemApp import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.landingPage, name='landingPage'),
+    path('about/', views.about, name='about'),
+    path('index/', views.index, name='index'),
+    path('login/', views.login, name='login'),
 ]

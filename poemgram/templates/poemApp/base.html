@@ -7,6 +7,7 @@
 <html>
 <head>
 	<!--header outsourced from https://www.w3schools.com/bootstrap/bootstrap_navbar.asp-->
+	<link rel="stylesheet" href="{% static 'landingPage.css' %}">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -23,7 +24,6 @@
 
 <body>
 <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
@@ -43,8 +43,11 @@
         </div>
       </div>
     </form>
-  </div>
 </nav>
+
+{% block body_block %}
+         Default Page
+{% endblock %}
 </body>
 
 </html>
