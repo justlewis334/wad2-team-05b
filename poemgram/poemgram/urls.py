@@ -18,10 +18,20 @@ from django.urls import path
 from django.urls import include
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
+from registration.backends.simple.views import RegistrationView
+
+## There's really no good place for this
+
+class MyRegistrationView(RegistrationView):
+    def get_success_url(self, request):
+        return "poemApp:index"
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('poemApp/', include(('poemApp.urls', 'poemApp'), namespace="poemApp")),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('/favicon.png'))),
+    path('accounts/register/', MyRegistrationView.as_view(), name="registration_register"),
     path('accounts/', include('registration.backends.simple.urls')),
 ]
