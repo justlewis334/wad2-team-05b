@@ -1,15 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
-    userID=models.BigIntegerField(unique=True, null=False)
-    name=models.CharField(max_length=128, null=False)
-    password = models.CharField(max_length=16, null=False)
-    isAdmin = models.BooleanField(null=False)
-    # forgot about this one...
-    email = models.EmailField(null=False)
-    
-    def __str__(self):
-        return self.name
+# Sike, turns out I was trying to reinvent the wheel with the user model
+
 
 class Poem(models.Model):
     poemID=models.BigIntegerField(unique=True, null=False)

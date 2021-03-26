@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# Django Registration Redux 2.2 is required
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'poemApp',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +119,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+# login stuff
+
+REGISTRATION_OPEN=True
+REGISTRATION_AUTO_LOGIN=True
+LOGIN_REDIRECT_URL='poemApp:index'
+LOGIN_URL='auth_login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
