@@ -19,14 +19,17 @@
 
 .panel-jumbotron {
   border:1 px solid grey;
-  width: 300px;
-  height: 600px;
-  margin: 0 auto
+  width: 305px;
+  height: 610px;
+  margin: 0 auto;
 }
 
 .wide-jumbotron {
   border:1 px solid grey;
-  width: 600px;
-  height: 600px;
+  width: 610px;
+  height: 610px;
   margin: 0 auto
+}
+
+label.required {
 }

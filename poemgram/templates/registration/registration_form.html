@@ -1,13 +1,6 @@
 {% extends 'poemApp/logoutBase.html' %}
 {%load  staticfiles  %}
 
-<!--<head>
-	header outsourced from https://www.w3schools.com/bootstrap/bootstrap_navbar.asp
-	<link rel="stylesheet" href="{% static 'landingPage.css' %}">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>-->
 {% block title_block %}
 Register
 {% endblock %}
@@ -16,15 +9,27 @@ Register
 <div class="container">
 
         <div class="jumbotron panel-jumbotron text-center">
-            <h1>Register</h1>
-			<form method="post" action=".">
+            <h3>Register</h3>
+			<form method="post" action="." class="needs-validation" novalidate>
 			{% csrf_token %}
-			<!--<p class="required"><label class="required" for="id_username">Username:</label> <input type="text" name="username" maxlength="150" autofocus required id="id_username"> <span class="helptext">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span></p>
-<p class="required"><label class="required" for="id_email">E-mail:</label> <input type="email" name="email" required id="id_email"></p>
-<p class="required"><label class="required" for="id_password1">Password:</label> <input type="password" name="password1" required id="id_password1"> <span class="helptext"><ul><li>Your password can&#39;t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can&#39;t be a commonly used password.</li><li>Your password can&#39;t be entirely numeric.</li></ul></span></p>
-<p class="required"><label class="required" for="id_password2">Password confirmation:</label> <input type="password" name="password2" required id="id_password2"> <span class="helptext">Enter the same password as before, for verification.</span></p>
-			-->{{ form.as_p }}
-			<input type="submit" value="Register"/>
+			<!--- TODO: convert the other inputs to be like the username, get the error message working -->
+			<div class="form-group">
+			<label class="required" for="id_username">Username:</label> <input class="form-control" type="text" name="username" maxlength="150" autofocus required id="id_username" required>
+			<div class="invalid-tooltip">
+				Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+			</div>
+			</div>
+			<div class="form-group">
+			<label class="required" for="id_email">E-mail:</label> <input type="email" name="email" required id="id_email">
+			</div>
+			<div class="form-group">
+			<label class="required" for="id_password1">Password:</label> <input type="password" name="password1" required id="id_password1"> <span class="helptext"><ul><li>Your password can&#39;t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can&#39;t be a commonly used password.</li><li>Your password can&#39;t be entirely numeric.</li></ul></span>
+			</div>
+			<div class="form-group">
+			<label class="required" for="id_password2">Password confirmation:</label> <input type="password" name="password2" required id="id_password2"> <span class="helptext">Enter the same password as before, for verification.</span>
+			</div>
+			<!--{{ form.as_p }}-->
+			<input type="submit" class="btn btn-primary" value="Register"/>
 			</form>
 		
 		<p align="center"><a href="{% url 'auth_login' %}">Already have an account?</button></p>
