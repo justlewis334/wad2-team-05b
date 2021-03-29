@@ -6,6 +6,7 @@
 .container{
     display: flex;
 	justify-content: space-evenly;
+	position: relative
 }
 
 .row{
@@ -22,6 +23,15 @@
   width: 305px;
   height: 610px;
   margin: 0 auto;
+  position: relative;
+}
+
+.reg-jumbotron {
+  border:1 px solid grey;
+  width: 305px;
+  height: 650px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .wide-jumbotron {
@@ -31,5 +41,10 @@
   margin: 0 auto
 }
 
-label.required {
+h3{
+	text-align: center;
+}
+
+p.centered{
+	text-align: center;
 }
