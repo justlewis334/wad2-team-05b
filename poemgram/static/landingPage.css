@@ -1,12 +1,13 @@
 .container-fluid{
-    display: flex;
+	display: flex;
 	justify-content: left;
 }
 
 .container{
-    display: flex;
+	display: flex;
 	justify-content: space-evenly;
-	position: relative
+	position: relative;
+	flex-wrap: wrap;
 }
 
 .row{
@@ -14,37 +15,51 @@
 }
 
 .vl {
-  border-left: 3px solid black;
-  height: auto;
+	border-left: 3px solid black;
+	height: auto;
 }
 
 .panel-jumbotron {
-  border:1 px solid grey;
-  width: 305px;
-  height: 610px;
-  margin: 0 auto;
-  position: relative;
+	width: 305px;
+	height: 610px;
+	margin: 0 auto;
+	position: relative;
 }
 
 .reg-jumbotron {
-  border:1 px solid grey;
-  width: 305px;
-  height: 650px;
-  margin: 0 auto;
-  position: relative;
+	width: 305px;
+	height: 650px;
+	margin: 0 auto;
+	position: relative;
 }
 
 .wide-jumbotron {
-  border:1 px solid grey;
-  width: 610px;
-  height: 610px;
-  margin: 0 auto
+	width: 610px;
+	height: 610px;
+	margin: 0 auto
 }
 
 h3{
 	text-align: center;
 }
 
-p.centered{
+.poemContainer{
+	text-align: left;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 5px;
+	height: 100%;
+	background-color: white;
+} 
+
+.centered{
 	text-align: center;
 }
+
+
+.wide{
+	width: 100%;
+}
+
+
+

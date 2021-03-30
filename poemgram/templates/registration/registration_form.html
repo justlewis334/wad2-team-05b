@@ -8,14 +8,10 @@ Register
 {% block page_block %}
 
 
-<div class="container">
-
 	<div class="jumbotron reg-jumbotron" >
 		<h3>Register</h3>
 		<form method="post" action="." class="needs-validation" novalidate id="regForm" >
 		{% csrf_token %}
-		<!--- TODO: convert the other inputs to be like the username, get the error message working -->
-		
 		<div class="form-group">
 		<label class="required" for="id_username">Username:</label> 
 		<input class="form-control" type="text" name="username" maxlength="150" autofocus id="id_username">
@@ -41,7 +37,7 @@ Register
 		</form>
 		<p class="centered"><a href="{% url 'auth_login' %}">Already have an account?</a></p>
 	</div>
-</div>
+
 
 <script src="{% static 'validation.js' %}" validationUrl="{% url 'poemApp:validate' %}" ></script>
 

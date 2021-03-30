@@ -7,21 +7,20 @@ Login
 {% endblock %}
 
 {% block page_block %}
-<div class="container">
 
         <div class="jumbotron panel-jumbotron">
             <h3>Login</h3>
-			<form method="post" action=".">
+			<form method="post" action="." novalidate>
 			{% csrf_token %}
 			<div class="form-group">
 				<label for="id_username">Username:</label> 
-				<input type="text" name="username" autofocus required id="id_username" class="form-control is-invalid">
+				<input type="text" name="username" autofocus required id="id_username" class="form-control">
 			</div>
 			<div class="form-group">
 				<label for="id_password">Password:</label> 
-				<input type="password" name="password" required id="id_password" class="form-control is-invalid">
+				<input type="password" name="password" required id="id_password" class="form-control">
 			</div>
-			<input type="submit" value="Log In"/>
+			<input class="btn btn-primary" type="submit" value="Log In"/>
 			<input type="hidden" name="next" value="{{ next }}"/>
 			</form>
 			<p class="centered">
@@ -30,6 +29,5 @@ Login
 			<p class="centered"><a href="{% url 'poemApp:landingPage' %}">Return to Index</a></p>
 		</div>
 
-</div>
 
 {% endblock %}

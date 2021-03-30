@@ -13,14 +13,13 @@ Landing Page
 {% endblock %}
 
 {% block page_block %}
-<div class="container">
-
 	<div class="jumbotron panel-jumbotron text-center">
-	<h1>Login</h1>
+	<h3>Most Liked Poem</h3>
+	{% include "poemApp/poem.html" %}
 	</div>
 	<div class="vl"></div>
 	<div class="jumbotron wide-jumbotron ">
-		<h2 align="center">How to Make a Dadaist Poem</h2>
+		<h3 align="center">How to Make a Dadaist Poem</h3>
 		<p >
 		To make a Dadaist poem:</p>
 		<ul>
@@ -45,5 +44,4 @@ Landing Page
 		<p align="center"><a href="{% url 'auth_login' %}">Sign Up</a></p>
 	</div>
 
-</div>
 {% endblock %}

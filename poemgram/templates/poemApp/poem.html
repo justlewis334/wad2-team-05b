@@ -1,0 +1,15 @@
+
+<div class="jumbotron-fluid p-2 poemContainer overflow-auto">
+	{% if title %}
+		<h4>{{title}}</h4>
+		<p>
+		{% for row in rows %}
+			{{row}}<br/>
+		{% endfor %}
+		</p>
+		<p>- {{author}}</p>
+	{% else %}
+		<strong>There are no poems present :( </strong>
+    {% endif %}
+		
+</div>

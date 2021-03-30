@@ -2,12 +2,28 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from poemApp.models import Poem
+import random
 
 def index(request):
-    return render(request,'poemApp/index.html')
+    contextDict={}
+    randPoem = random.choice(Poem.objects.all())
+    if randPoem!=None:
+        contextDict["rtitle"]=randPoem.title
+        contextDict["rrows"]=randPoem.text.split("\n")
+        contextDict["rauthor"]=randPoem.user.username
+    contextDict["recent"]=Poem.objects.order_by("-addedDate")[:8]
+    contextDict["mostLikes"]=Poem.objects.order_by("-likes")[:8]
+    return render(request,'poemApp/index.html', context=contextDict)
 
 def landingPage(request):
-    return render(request,'poemApp/landingPage.html')
+    mostLiked = Poem.objects.order_by("-likes").first()
+    contextDict={}
+    if mostLiked!=None:
+        contextDict["title"]=mostLiked.title
+        contextDict["rows"]=mostLiked.text.split("\n")
+        contextDict["author"]=mostLiked.user.username
+    return render(request,'poemApp/landingPage.html', context=contextDict)
 
 def login(request):
     return render(request,'poemApp/loginPage.html')

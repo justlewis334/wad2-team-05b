@@ -22,7 +22,6 @@ jQuery.validator.addMethod("validPassword", function(value, element)
 
 $().ready(function()
 {
-	alert(thisScript.getAttribute('validationUrl'));
 	$("#regForm").validate(
 	{
 		rules:
