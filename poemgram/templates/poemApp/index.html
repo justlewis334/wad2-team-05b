@@ -13,27 +13,8 @@ Index
 			{% include "poemApp/poem.html" with author=rauthor rows=rrows title=rtitle  %}
         </div>
 		<div class="vl"></div>
-		<div class="jumbotron panel-jumbotron overflow-auto">
-            <h3>Most recent</h3>
-			<hr/>
-			{% for r in recent %}
-				{{forloop.counter}}. "{{r.title}}" by {{r.user.username}} 
-				<hr/>
-			{% empty %}
-				<strong>There are no poems present :( </strong>
-			{% endfor %}
-        </div>
+			{% include "poemApp/leaderboard.html" with name="Most recent" poems=recent only %}
 		<div class="vl"></div>
-		<div class="jumbotron panel-jumbotron overflow-auto ">
-            <h3>Most liked</h3>
-			<hr/>
-			{% for l in mostLikes %}
-				{{forloop.counter}}. "{{l.title}}" by {{l.user.username}} 
-				<hr/>
-			{% empty %}
-				<strong>There are no poems present :( </strong>
-			{% endfor %}
-        </div>
-
+			{% include "poemApp/leaderboard.html" with name="Most liked" poems=mostLikes only %}
 </div>
 {% endblock %}

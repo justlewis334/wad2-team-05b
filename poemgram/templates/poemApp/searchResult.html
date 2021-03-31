@@ -1,0 +1,36 @@
+{% extends 'poemApp/base.html' %}
+{%load  staticfiles  %}
+
+{% block title_block %}
+Search results
+{% endblock %}
+
+{% block body_block %}
+<div class="container-fluid">
+<h3>Search Results</h3>
+
+<ul>
+	{% if type == "Poem" %}
+	{% for i in list %}
+    <li>
+		{{ i.title }}, {{ i.text }}
+    </li>
+	{% empty %}
+		Sadge
+	{% endfor %}
+	{% else %}
+	
+	{% for i in list %}
+	<li>
+		{{ i.username }}
+    </li>
+	{% empty %}
+		Sadsen
+	{% endfor %}
+	
+	{% endif %}
+
+	
+</ul>
+</div>
+{% endblock %}

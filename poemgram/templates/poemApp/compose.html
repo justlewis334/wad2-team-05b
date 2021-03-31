@@ -1,0 +1,39 @@
+{% extends 'poemApp/base.html' %}
+{%load  staticfiles  %}
+
+{% block title_block %}
+Index
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+		<!--TODO: Add links to the list (or make them in the first place...)-->
+        <div class="jumbotron panel-jumbotron text-center">
+            <h3>Random poem</h3>
+			{% include "poemApp/poem.html" with author=rauthor rows=rrows title=rtitle  %}
+        </div>
+		<div class="vl"></div>
+		<div class="jumbotron panel-jumbotron overflow-auto">
+            <h3>Most recent</h3>
+			<hr/>
+			{% for r in recent %}
+				{{forloop.counter}}. "{{r.title}}" by {{r.user.username}} 
+				<hr/>
+			{% empty %}
+				<strong>There are no poems present :( </strong>
+			{% endfor %}
+        </div>
+		<div class="vl"></div>
+		<div class="jumbotron panel-jumbotron overflow-auto ">
+            <h3>Most liked</h3>
+			<hr/>
+			{% for l in mostLikes %}
+				{{forloop.counter}}. "{{l.title}}" by {{l.user.username}} 
+				<hr/>
+			{% empty %}
+				<strong>There are no poems present :( </strong>
+			{% endfor %}
+        </div>
+
+</div>
+{% endblock %}

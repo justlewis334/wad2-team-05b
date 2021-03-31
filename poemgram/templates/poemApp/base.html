@@ -52,8 +52,16 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0" action="{% url 'poemApp:search' %}" method="get">
+
+		
+		<label class="radio-inline mr-sm-2">
+			<input class="form-check-input mr-sm-2" type="radio" name="type" value="Poem" checked>Poems
+		</label>
+		<label class="radio-inline mr-sm-2">
+			<input class="form-check-input mr-sm-2" type="radio" name="type" value="User">Users
+		</label>
+      <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>

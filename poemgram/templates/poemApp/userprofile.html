@@ -1,0 +1,31 @@
+{% extends 'poemApp/base.html' %}
+{%load  staticfiles  %}
+
+{% block title_block %}
+{{user.username}}
+{% endblock %}
+
+{% block body_block %}
+<div class="container">
+	{% if user %}
+        <div class="jumbotron panel-jumbotron text-center">
+            <h3>{{user.username}}</h3>
+        </div>
+		<div class="vl"></div>
+		<div class="jumbotron wide-jumbotron overflow-auto">
+            <h3>Most recent</h3>
+			<hr/>
+			{% for i in poem %}
+				{{forloop.counter}}. "{{i.title}}" by {{i.text}} 
+				<hr/>
+			{% empty %}
+				<strong>This user did not upload any poems yet </strong>
+			{% endfor %}
+        </div>
+	{% else %}
+		<div class="jumbotron panel-jumbotron text-center">
+            <h3>There is no such user</h3>
+        </div>
+	{% endif %}
+</div>
+{% endblock %}

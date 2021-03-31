@@ -1,0 +1,14 @@
+<div class="jumbotron panel-jumbotron overflow-auto">
+	<h3>{{name}}
+	{% if author %}
+		by {{author}}
+	{% endif %}
+	</h3>
+	<hr/>
+	{% for i in poems %}
+		{{forloop.counter}}. "{{i.title}}" by {{i.user.username}} 
+	<hr/>
+	{% empty %}
+	<strong> There are no poems present :( </strong>
+	{% endfor %}
+</div>

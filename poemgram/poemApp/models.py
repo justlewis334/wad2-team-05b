@@ -1,9 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
+from django_extensions.db.fields import AutoSlugField
 
-# Sike, turns out I was trying to reinvent the wheel with the user model
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    slug=AutoSlugField(populate_from='user__username', slugify_function=slugify)
 
+    def __str__(self):
+        return self.slug
+
+    
 class Poem(models.Model):
     title = models.CharField(max_length=100, null=False, unique=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -11,6 +19,8 @@ class Poem(models.Model):
     articleTitle = models.CharField(max_length=100, null=True)
     text = models.TextField(null=False)
     addedDate = models.DateTimeField(auto_now_add=True, null=False)
+    slug=AutoSlugField(populate_from='title', slugify_function=slugify)
+
 
     def __str__(self):
         return self.articleTitle
@@ -19,7 +29,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     poem = models.ForeignKey(Poem, on_delete=models.SET_NULL, null=True)
     # just don't write a whole poem, it'll be fine
-    text = models.CharField(max_length=1000, null=False, default="")
+    text = models.TextField(null=False, default="")
     likes = models.BigIntegerField(null=False, default=0)
     # There isn't a good solution for on_delete
     # The "right" way to do it is that when a comment is deleted, only the text/username gets deleted
