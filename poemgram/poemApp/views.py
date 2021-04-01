@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 from poemApp.models import Poem, UserProfile
 from django.template.defaultfilters import slugify
 from django.views.generic.list import ListView
-from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 import random
 
 def index(request):
@@ -45,9 +44,12 @@ def showUserprofile(request, usernameSlug):
         contextDict["poems"]= None
     return render(request,'poemApp/userprofile.html', context=contextDict)
 
+def compose(request):
+    contextDict={}
+    return render(request,'poemApp/compose.html', context=contextDict)
+
 def search(request):
     contextDict={}
-
 
     if request.GET.get('type')=="Poem":
         contextDict["type"]="Poem"
@@ -58,7 +60,11 @@ def search(request):
 
     return render(request,'poemApp/searchResult.html', context=contextDict)
 
-
+def submitPoem(request):
+    # I forgot to ask for the title...
+    contextDict={}
+    request.user
+    
 # based on https://www.pluralsight.com/guides/work-with-ajax-django
 
 def checkUserName(request):

@@ -11,4 +11,6 @@ urlpatterns = [
     path('validate/', views.checkUserName, name='validate'),
     path('user/<slug:usernameSlug>', views.showUserprofile, name='showUserprofile'),
     path('search/', views.search, name='search'),
+    path('compose/', views.compose, name='compose'),
+    path('submitPoem/', views.submitPoem, name='submitPoem'),
 ]

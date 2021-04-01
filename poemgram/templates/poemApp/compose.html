@@ -2,38 +2,29 @@
 {%load  staticfiles  %}
 
 {% block title_block %}
-Index
+Compose
 {% endblock %}
 
 {% block body_block %}
-<div class="container">
-		<!--TODO: Add links to the list (or make them in the first place...)-->
-        <div class="jumbotron panel-jumbotron text-center">
-            <h3>Random poem</h3>
-			{% include "poemApp/poem.html" with author=rauthor rows=rrows title=rtitle  %}
-        </div>
-		<div class="vl"></div>
-		<div class="jumbotron panel-jumbotron overflow-auto">
-            <h3>Most recent</h3>
-			<hr/>
-			{% for r in recent %}
-				{{forloop.counter}}. "{{r.title}}" by {{r.user.username}} 
-				<hr/>
-			{% empty %}
-				<strong>There are no poems present :( </strong>
-			{% endfor %}
-        </div>
-		<div class="vl"></div>
-		<div class="jumbotron panel-jumbotron overflow-auto ">
-            <h3>Most liked</h3>
-			<hr/>
-			{% for l in mostLikes %}
-				{{forloop.counter}}. "{{l.title}}" by {{l.user.username}} 
-				<hr/>
-			{% empty %}
-				<strong>There are no poems present :( </strong>
-			{% endfor %}
-        </div>
 
+
+<div class="container">		
+	<ul id="sortable1" class="jumbotron panel-jumbotron connectedSortable cardContainer spaceBetween verticalScroll" style="list-style-type:none;">	
+		<li class="anchor">Press enter to break line</li><li class="break"/>
+		<li class="anchor">Words:</li><li class="break"/>
+		<li class="wordcard">Lorem</li><li class="wordcard">ipsum</li><li class="wordcard">dolor</li><li class="wordcard">sit</li><li class="wordcard">amet,</li><li class="wordcard">consectetur</li><li class="wordcard">adipiscing</li><li class="wordcard">elit.</li><li class="wordcard">Praesent</li><li class="wordcard">quis</li><li class="wordcard">ultrices</li><li class="wordcard">velit.</li><li class="wordcard">Suspendisse</li><li class="wordcard">cursus,</li><li class="wordcard">odio</li><li class="wordcard">at</li><li class="wordcard">imperdiet</li><li class="wordcard">feugiat,</li><li class="wordcard">nisl</li><li class="wordcard">metus</li><li class="wordcard">luctus</li><li class="wordcard">erat,</li><li class="wordcard">quis</li><li class="wordcard">dictum</li><li class="wordcard">lectus</li><li class="wordcard">mi</li><li class="wordcard">eget</li><li class="wordcard">erat.</li><li class="wordcard">Maecenas</li><li class="wordcard">luctus</li><li class="wordcard">lectus</li><li class="wordcard">vel</li><li class="wordcard">ligula</li><li class="wordcard">finibus,</li><li class="wordcard">ut</li><li class="wordcard">viverra</li><li class="wordcard">libero</li><li class="wordcard">consequat.</li><li class="wordcard">Vestibulum</li><li class="wordcard">auctor</li><li class="wordcard">elementum</li><li class="wordcard">dolor,</li><li class="wordcard">nec</li><li class="wordcard">vulputate</li><li class="wordcard">ex.</li><li class="wordcard">Quisque</li><li class="wordcard">nec</li><li class="wordcard">mattis</li><li class="wordcard">ex,</li><li class="wordcard">ac</li><li class="wordcard">porta</li><li class="wordcard">ex.</li><li class="wordcard">Duis</li><li class="wordcard">fermentum</li><li class="wordcard">velit</li><li class="wordcard">eget</li><li class="wordcard">maximus</li><li class="wordcard">tincidunt.</li><li class="wordcard">Nunc</li><li class="wordcard">quis</li><li class="wordcard">risus</li><li class="wordcard">at</li><li class="wordcard">arcu</li><li class="wordcard">cursus</li><li class="wordcard">dictum.</li><li class="wordcard"></li>
+		<li class="wordcard">Lorem</li><li class="wordcard">ipsum</li><li class="wordcard">dolor</li><li class="wordcard">sit</li><li class="wordcard">amet,</li><li class="wordcard">consectetur</li><li class="wordcard">adipiscing</li><li class="wordcard">elit.</li><li class="wordcard">Praesent</li><li class="wordcard">quis</li><li class="wordcard">ultrices</li><li class="wordcard">velit.</li><li class="wordcard">Suspendisse</li><li class="wordcard">cursus,</li><li class="wordcard">odio</li><li class="wordcard">at</li><li class="wordcard">imperdiet</li><li class="wordcard">feugiat,</li><li class="wordcard">nisl</li><li class="wordcard">metus</li><li class="wordcard">luctus</li><li class="wordcard">erat,</li><li class="wordcard">quis</li><li class="wordcard">dictum</li><li class="wordcard">lectus</li><li class="wordcard">mi</li><li class="wordcard">eget</li><li class="wordcard">erat.</li><li class="wordcard">Maecenas</li><li class="wordcard">luctus</li><li class="wordcard">lectus</li><li class="wordcard">vel</li><li class="wordcard">ligula</li><li class="wordcard">finibus,</li><li class="wordcard">ut</li><li class="wordcard">viverra</li><li class="wordcard">libero</li><li class="wordcard">consequat.</li><li class="wordcard">Vestibulum</li><li class="wordcard">auctor</li><li class="wordcard">elementum</li><li class="wordcard">dolor,</li><li class="wordcard">nec</li><li class="wordcard">vulputate</li><li class="wordcard">ex.</li><li class="wordcard">Quisque</li><li class="wordcard">nec</li><li class="wordcard">mattis</li><li class="wordcard">ex,</li><li class="wordcard">ac</li><li class="wordcard">porta</li><li class="wordcard">ex.</li><li class="wordcard">Duis</li><li class="wordcard">fermentum</li><li class="wordcard">velit</li><li class="wordcard">eget</li><li class="wordcard">maximus</li><li class="wordcard">tincidunt.</li><li class="wordcard">Nunc</li><li class="wordcard">quis</li><li class="wordcard">risus</li><li class="wordcard">at</li><li class="wordcard">arcu</li><li class="wordcard">cursus</li><li class="wordcard">dictum.</li><li class="wordcard"></li>
+	</ul>
+
+	<div class="vl" ></div>
+	<ul id="sortable2" class="jumbotron wide-jumbotron overflow-auto connectedSortable cardContainer" style="list-style-type:none;"></ul>
+		
+	<script src="{% static 'compose.js' %}" } ></script>
+		
+	<div class="pt-5 wide"></div>
+	<form  action="{% url 'poemApp:search' %}" method="get">
+		<textarea style="display:none;" id="hidden" name="poem" value="" ></textarea>
+		<input class="btn btn-primary" type="submit" value="Submit" id="submit"/>
+	</form>
 </div>
 {% endblock %}

@@ -21,6 +21,10 @@ class Poem(models.Model):
     addedDate = models.DateTimeField(auto_now_add=True, null=False)
     slug=AutoSlugField(populate_from='title', slugify_function=slugify)
 
+    @classmethod
+    def create(cls, title, user, text, articleTitle=None):
+        return cls(title=title, user=user, text=text, articleTitle=articleTitle, likes=0)
+
 
     def __str__(self):
         return self.articleTitle
