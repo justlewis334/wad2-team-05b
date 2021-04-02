@@ -13,7 +13,7 @@ class UserProfile(models.Model):
 
     
 class Poem(models.Model):
-    title = models.CharField(max_length=100, null=False, unique=True)
+    title = models.CharField(max_length=100, null=False)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     likes = models.BigIntegerField(null=False, default=0)
     articleTitle = models.CharField(max_length=100, null=True)

@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 from poemApp.models import Poem, UserProfile
 from django.template.defaultfilters import slugify
 from django.views.generic.list import ListView
+from django.shortcuts import redirect
 import random
 
 def index(request):
-    print(slugify("sda@sa/dsad_asdsad"))
     contextDict={}
     randPoem = random.choice(Poem.objects.all())
     if randPoem!=None:
@@ -61,9 +61,9 @@ def search(request):
     return render(request,'poemApp/searchResult.html', context=contextDict)
 
 def submitPoem(request):
-    # I forgot to ask for the title...
-    contextDict={}
-    request.user
+    p=Poem.create(request.POST.get("title"), request.user, request.POST.get("poem"), "asdsada")
+    p.save()
+    return redirect("/poemApp/index")
     
 # based on https://www.pluralsight.com/guides/work-with-ajax-django
 

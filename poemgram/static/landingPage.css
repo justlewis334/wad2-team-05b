@@ -20,6 +20,8 @@
 }
 
 .panel-jumbotron {
+	margin-bottom: 3em;
+	padding-top: 3em;
 	width: 305px;
 	height: 610px;
 	margin: 0 auto;
@@ -27,6 +29,7 @@
 }
 
 .reg-jumbotron {
+	padding-top: 3em;
 	width: 305px;
 	height: 650px;
 	margin: 0 auto;
@@ -34,6 +37,7 @@
 }
 
 .wide-jumbotron {
+	padding-top: 3em;
 	width: 610px;
 	height: 610px;
 	margin: 0 auto
@@ -92,4 +96,7 @@ h3{
 .verticalScroll{
   overflow-y: hidden;
   overflow-x: hidden;
+}
+.noMargin{
+	margin: 0px;
 }
