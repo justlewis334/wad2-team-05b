@@ -47,6 +47,7 @@ class Like(models.Model):
     def __str__(self):
         return str(self.poem)
 
+
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     poem = models.ForeignKey(Poem, on_delete=models.SET_NULL, null=True)

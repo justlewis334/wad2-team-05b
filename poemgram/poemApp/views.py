@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from poemApp.models import Poem, UserProfile
+from poemApp.models import Poem, UserProfile, Like
 from django.views.generic.list import ListView
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -119,6 +119,33 @@ def checkUserName(request):
 
 def poem_like_unlike(request):
     user = request.user
-    #Request must be POST
+    # Request must be POST
     if request.method == "POST":
-        poem_id = request.POST.get()
+        poem_id = request.POST.get('id') # Look into this <<<<<
+        poem = Poem.objects.get(id=poem_id)
+        user_prof = UserProfile.objects.get(user=user)
+
+        if user_prof in poem.likes.all():
+            poem.likes.remove(user_prof)
+        else:
+            poem.likes.add(user_prof)
+
+        like, created = Like.objects.get_or_create(user=user_prof, poem_id=poem_id)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'Unlike'
+            else:
+                like.value = 'Like'
+        else:
+            like.value = 'Like'
+
+            poem.save()
+            like.save()
+
+        data = {
+            'value': like.value,
+            'likes': poem.likes.all().count
+        }
+        return JsonResponse(data, safe=false)
+    return render(request,'poemApp/index.html')
