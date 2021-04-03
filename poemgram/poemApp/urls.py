@@ -13,4 +13,5 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('compose/', views.compose, name='compose'),
     path('submitPoem/', views.submitPoem, name='submitPoem'),
+    path('precompose/', views.preCompose, name='precompose'),
 ]

@@ -10,6 +10,7 @@ $( function() {
 	$.validator.setDefaults({ 
 		ignore: [],
 	});
+	
 	$( "#poem" ).hide();
 	$( "#fakeTitle" ).hide();
 	let sortable1 = $( "#sortable1" );
@@ -21,6 +22,7 @@ $( function() {
 	$( "#sortable1, #sortable2" ).sortable({
 		connectWith: ".cardContainer"
     }).disableSelection();
+	
 	sortable1.sortable({
 		items: "li:not(.anchor)"
     });

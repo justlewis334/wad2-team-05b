@@ -6,7 +6,6 @@
 {% endblock %}
 
 {% block body_block %}
-<div class="container">
 	{% if user %}
         <div class="jumbotron panel-jumbotron text-center">
             <h3>{{user.username}}</h3>
@@ -27,5 +26,4 @@
             <h3>There is no such user</h3>
         </div>
 	{% endif %}
-</div>
 {% endblock %}

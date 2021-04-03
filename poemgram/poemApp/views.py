@@ -1,12 +1,16 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpRequest
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from poemApp.models import Poem, UserProfile
-from django.template.defaultfilters import slugify
 from django.views.generic.list import ListView
 from django.shortcuts import redirect
+from django.urls import reverse
+from urllib.parse import urlencode
+# this was preinstalled for me, if you need it, you can download it with "pip install requests"
+import requests
 import random
+import re
 
 def index(request):
     contextDict={}
@@ -44,9 +48,41 @@ def showUserprofile(request, usernameSlug):
         contextDict["poems"]= None
     return render(request,'poemApp/userprofile.html', context=contextDict)
 
-def compose(request):
+
+def preCompose(request):
+    # Doing this in JS would have exposed my API key
+    mykey="c871909d1ffead4f16cafa1d2fc5e42a23d6eb6d"
+    # none is false
+    if request.GET.get("url") or request.GET.get("text"):
+        if request.GET.get("url")=="":
+            return compose(request)
+        else:
+            response=requests.get("https://extractorapi.com/api/v1/extractor/?apikey="+mykey+"&url="+request.GET.get("url")).json()
+            if response["status_code"]==200:
+                base_url = reverse('poemApp:compose')
+                query_string =  urlencode({'text': response["text"]}) + "&" + urlencode({'title': response["title"]})
+                return  redirect(base_url+"?"+query_string)
+            else:
+                return render(request,'poemApp/precompose.html', context={"badUrl":"True"})
+
+    else:
+        return render(request,'poemApp/precompose.html')
+            
+        
+        
     contextDict={}
-    return render(request,'poemApp/compose.html', context=contextDict)
+    
+
+def compose(request):
+    if request.GET.get("text")==None:
+        return preCompose(request)
+    else:
+        contextDict={}
+        contextDict["text"]=[]
+        contextDict["title"]=request.GET.get("title")
+        for i in re.split(",| |_|\?|\n|\.|!", request.GET.get("text")):
+            contextDict["text"].append(i)
+        return render(request,'poemApp/compose.html', context=contextDict)
 
 def search(request):
     contextDict={}
