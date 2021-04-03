@@ -15,7 +15,7 @@ class UserProfile(models.Model):
 class Poem(models.Model):
     title = models.CharField(max_length=100, null=False)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    likes = models.BigIntegerField(null=False, default=0)
+    likes = models.ManyToManyField(User, default=False, blank=True, related_name='%(class)s_related')
     articleTitle = models.CharField(max_length=100, null=True)
     text = models.TextField(null=False)
     addedDate = models.DateTimeField(auto_now_add=True, null=False)
@@ -25,16 +25,34 @@ class Poem(models.Model):
     def create(cls, title, user, text, articleTitle=None):
         return cls(title=title, user=user, text=text, articleTitle=articleTitle, likes=0)
 
+    @property
+    def total_likes(self):
+        return self.likes.all().count()
 
     def __str__(self):
         return self.articleTitle
+
+
+LIKE_CHOICES = (
+    ('Like', 'Like'),
+    ('Unlike', 'Unlike'),
+)
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    poem = models.ForeignKey(Poem, on_delete=models.CASCADE)
+    value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=10)
+
+    def __str__(self):
+        return str(self.poem)
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     poem = models.ForeignKey(Poem, on_delete=models.SET_NULL, null=True)
     # just don't write a whole poem, it'll be fine
     text = models.TextField(null=False, default="")
-    likes = models.BigIntegerField(null=False, default=0)
+    likes = models.ManyToManyField(User, default=False, blank=True, related_name='%(class)s_related')
     # There isn't a good solution for on_delete
     # The "right" way to do it is that when a comment is deleted, only the text/username gets deleted
     # This way, the comment chain gets preserved

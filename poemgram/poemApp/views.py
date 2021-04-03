@@ -115,3 +115,10 @@ def checkUserName(request):
             return JsonResponse("true", status = 200, safe=False)
 
     return JsonResponse({}, status = 400)
+
+
+def poem_like_unlike(request):
+    user = request.user
+    #Request must be POST
+    if request.method == "POST":
+        poem_id = request.POST.get()
