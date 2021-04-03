@@ -147,5 +147,5 @@ def poem_like_unlike(request):
             'value': like.value,
             'likes': poem.likes.all().count
         }
-        return JsonResponse(data, safe=false)
+        return JsonResponse(data, safe=False)
     return render(request,'poemApp/index.html')
