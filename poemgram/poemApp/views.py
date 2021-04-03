@@ -121,7 +121,7 @@ def poem_like_unlike(request):
     user = request.user
     # Request must be POST
     if request.method == "POST":
-        poem_id = request.POST.get('id') # Look into this <<<<<
+        poem_id = request.POST.get('poem_id')  # Look into this <<<<<
         poem = Poem.objects.get(id=poem_id)
         user_prof = UserProfile.objects.get(user=user)
 
@@ -148,4 +148,4 @@ def poem_like_unlike(request):
             'likes': poem.likes.all().count
         }
         return JsonResponse(data, safe=False)
-    return render(request,'poemApp/index.html')
+    return redirect('poemApp/poem.html')  # Also look at this <<<<< / Likely needs to be in 'poem:x' format

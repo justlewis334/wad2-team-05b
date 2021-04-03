@@ -1,3 +1,8 @@
 from django.contrib import admin
+from poemApp.models import Poem, Comment, Like
+from poemApp.models import UserProfile
 
-# Register your models here.
+admin.site.register(Poem)
+admin.site.register(Comment)
+admin.site.register(Like)
+admin.site.register(UserProfile)  # Is this needed?

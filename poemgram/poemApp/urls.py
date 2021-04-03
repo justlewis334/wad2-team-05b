@@ -14,4 +14,5 @@ urlpatterns = [
     path('compose/', views.compose, name='compose'),
     path('submitPoem/', views.submitPoem, name='submitPoem'),
     path('precompose/', views.preCompose, name='precompose'),
+    path('like/', views.poem_like_unlike, name='like-poem'),
 ]
