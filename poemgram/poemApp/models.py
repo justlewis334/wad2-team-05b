@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 class Poem(models.Model):
     title = models.CharField(max_length=100, null=False)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    likes = models.ManyToManyField(User, default=False, blank=True, related_name='post_likes')
+    likes = models.ManyToManyField(User, default=None, blank=True, related_name='post_likes')
     articleTitle = models.CharField(max_length=100, null=True)
     text = models.TextField(null=False)
     addedDate = models.DateTimeField(auto_now_add=True, null=False)
@@ -36,7 +36,7 @@ class Poem(models.Model):
 
 LIKE_CHOICES = (
     ('Like', 'Like'),
-    ('Unlike', 'Unlike'),
+    ('Dislike', 'Dislike'),
 )
 
 

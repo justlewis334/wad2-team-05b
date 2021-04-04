@@ -15,24 +15,20 @@
 		
 </div>
 
-<!-- Code for like button - Poem page not finished so can't slot it in anywhere -->
-
 <form action="{% url 'poemApp:like-poem' %}" method="post" class="like-form" id="{{obj.id}}">
 	{% csrf_token %}
 	<input type="hidden" name="poem_id" value="{{obj.id}}">
 	<button type="submit" class="ui button like-button{{obj.id}}">
-	{% if user_prof not in obj.liked.all %}
+	{% if user not in obj.likes.all %}
 		Like
 	{% else %}
 		Dislike
 	{% endif %}
 	</button>
-	<div class="column">
-		<div class="like-count{{obj.id}}">{{obj.total_likes}}</div>
-	</div>
-	<div class="column">
-		likes
-	</div>
+
+	<div class="like-count{{obj.id}}">{{obj.total_likes}}</div>
+	likes
+
 </form>
 
-<script src="{% static 'poemLike.js' %}"} ></script>
+<script src="{% static 'poemLikes.js' %}"} ></script>

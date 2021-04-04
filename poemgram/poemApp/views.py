@@ -143,7 +143,7 @@ def poem_like_unlike(request):
 
         if not created:
             if like.value == 'Like':
-                like.value = 'Unlike'
+                like.value = 'Dislike'
             else:
                 like.value = 'Like'
         else:
