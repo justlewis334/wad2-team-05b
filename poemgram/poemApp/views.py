@@ -123,7 +123,7 @@ def checkUserName(request):
 
     return JsonResponse({}, status = 400)
 
-# please mark it as @login_required if it makes sense
+@login_required
 def poem_like_unlike(request):
     user = request.user
     # Request must be POST
