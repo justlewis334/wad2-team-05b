@@ -125,6 +125,7 @@ REGISTRATION_OPEN=True
 REGISTRATION_AUTO_LOGIN=True
 LOGIN_REDIRECT_URL='poemApp:index'
 LOGIN_URL='auth_login'
+LOGOUT_REDIRECT_URL='poemApp:landingPage'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/

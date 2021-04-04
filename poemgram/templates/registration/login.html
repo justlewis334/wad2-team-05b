@@ -1,4 +1,4 @@
-{% extends 'poemApp/logoutBase.html' %}
+{% extends 'poemApp/base.html' %}
 {%load  staticfiles  %}
 
 
@@ -6,7 +6,7 @@
 Login
 {% endblock %}
 
-{% block page_block %}
+{% block body_block %}
 
         <div class="jumbotron panel-jumbotron">
             <h3>Login</h3>
@@ -20,7 +20,9 @@ Login
 				<label for="id_password">Password:</label> 
 				<input type="password" name="password" required id="id_password" class="form-control">
 			</div>
-			<input class="btn btn-primary" type="submit" value="Log In"/>
+			<p class="centered">
+				<input class="btn btn-primary" type="submit" value="Log In"/>
+			</p>
 			<input type="hidden" name="next" value="{{ next }}"/>
 			</form>
 			<p class="centered">

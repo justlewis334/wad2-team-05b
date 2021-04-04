@@ -1,4 +1,4 @@
-{% extends 'poemApp/logoutBase.html' %}
+{% extends 'poemApp/base.html' %}
 {%load  staticfiles  %}
 
 <!--<head>
@@ -12,7 +12,7 @@ header outsourced from https://www.w3schools.com/bootstrap/bootstrap_navbar.asp
 Landing Page
 {% endblock %}
 
-{% block page_block %}
+{% block body_block %}
 	<div class="jumbotron panel-jumbotron text-center">
 	<h3>Most Liked Poem</h3>
 	{% include "poemApp/poem.html" %}

@@ -7,11 +7,15 @@ from django.views.generic.list import ListView
 from django.shortcuts import redirect
 from django.urls import reverse
 from urllib.parse import urlencode
+from django.contrib.auth.decorators import login_required
 # this was preinstalled for me, if you need it, you can download it with "pip install requests"
 import requests
 import random
 import re
 
+
+
+@login_required
 def index(request):
     contextDict={}
     randPoem = random.choice(Poem.objects.all())
@@ -38,6 +42,7 @@ def login(request):
 def about(request):
     return render(request,'poemApp/about.html')
 
+@login_required
 def showUserprofile(request, usernameSlug):
     contextDict={}
     try:
@@ -48,7 +53,7 @@ def showUserprofile(request, usernameSlug):
         contextDict["poems"]= None
     return render(request,'poemApp/userprofile.html', context=contextDict)
 
-
+@login_required
 def preCompose(request):
     # Doing this in JS would have exposed my API key
     mykey="c871909d1ffead4f16cafa1d2fc5e42a23d6eb6d"
@@ -72,7 +77,7 @@ def preCompose(request):
         
     contextDict={}
     
-
+@login_required
 def compose(request):
     if request.GET.get("text")==None:
         return preCompose(request)
@@ -83,7 +88,8 @@ def compose(request):
         for i in re.split(",| |_|\?|\n|\.|!", request.GET.get("text")):
             contextDict["text"].append(i)
         return render(request,'poemApp/compose.html', context=contextDict)
-
+    
+@login_required
 def search(request):
     contextDict={}
 
@@ -96,6 +102,7 @@ def search(request):
 
     return render(request,'poemApp/searchResult.html', context=contextDict)
 
+@login_required
 def submitPoem(request):
     p=Poem.create(request.POST.get("title"), request.user, request.POST.get("poem"), "asdsada")
     p.save()
@@ -116,7 +123,7 @@ def checkUserName(request):
 
     return JsonResponse({}, status = 400)
 
-
+# please mark it as @login_required if it makes sense
 def poem_like_unlike(request):
     user = request.user
     # Request must be POST

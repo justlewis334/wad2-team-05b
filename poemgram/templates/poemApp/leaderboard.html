@@ -5,8 +5,9 @@
 	{% endif %}
 	</h3>
 	<hr/>
+	{% getSlug i.user as obj %}
 	{% for i in poems %}
-		{{forloop.counter}}. "{{i.title}}" by {{i.user.username}} 
+		{{forloop.counter}}. "{{i.title}}" by <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ i.user.username }}</a>
 	<hr/>
 	{% empty %}
 	<strong> There are no poems present :( </strong>

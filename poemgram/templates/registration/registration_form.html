@@ -1,11 +1,11 @@
-{% extends 'poemApp/logoutBase.html' %}
+{% extends 'poemApp/base.html' %}
 {%load  staticfiles  %}
 
 {% block title_block %}
 Register
 {% endblock %}
 
-{% block page_block %}
+{% block body_block %}
 
 
 	<div class="jumbotron reg-jumbotron" >
@@ -30,7 +30,6 @@ Register
 		<input type="password" class="form-control" name="password2" required id="id_password2"> 
 
 		</div>
-		<!--{{ form.as_p }}-->
 		<div class="row justify-content-center">
 		<input type="submit" class="btn btn-primary" value="Register"/>
 		</div>

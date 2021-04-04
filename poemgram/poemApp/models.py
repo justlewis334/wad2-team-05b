@@ -5,6 +5,7 @@ from django_extensions.db.fields import AutoSlugField
 
 
 class UserProfile(models.Model):
+    # I don't know about default 1, but it shouldn't be important anyways 
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
     slug=AutoSlugField(populate_from='user__username', slugify_function=slugify)
 
