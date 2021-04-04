@@ -43,7 +43,7 @@ LIKE_CHOICES = (
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     poem = models.ForeignKey(Poem, on_delete=models.CASCADE)
-    value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=10)
+    value = models.CharField(choices=LIKE_CHOICES, default='Unlike', max_length=10)
 
     def __str__(self):
         return str(self.poem)

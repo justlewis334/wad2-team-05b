@@ -123,12 +123,13 @@ def checkUserName(request):
 
     return JsonResponse({}, status = 400)
 
+
 @login_required
 def poem_like_unlike(request):
     user = request.user
     # Request must be POST
     if request.method == "POST":
-        poem_id = request.POST.get('poem_id')  # Look into this <<<<<
+        poem_id = request.POST.get('articleTitle')  # What uniquely identifies a poem in the DB?
         poem = Poem.objects.get(id=poem_id)
         user_prof = UserProfile.objects.get(user=user)
 

@@ -17,7 +17,7 @@
 
 <!-- Code for like button - Poem page not finished so can't slot it in anywhere -->
 
-<form action="{% url 'poem:like-poem' %}" method="post" class="like-form" id="{{obj.id}}">
+<form action="{% url 'poemApp:like-poem' %}" method="post" class="like-form" id="{{obj.id}}">
 	{% csrf_token %}
 	<input type="hidden" name="poem_id" value="{{obj.id}}">
 	<button type="submit" class="ui button like-button{{obj.id}}">
