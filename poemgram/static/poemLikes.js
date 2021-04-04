@@ -17,7 +17,7 @@ $('.like-form').submit(function(e){
         type: 'POST',
         url: url,
         data: {
-            'csrfmwtoken': $('input[name=csrfmwtoken]').val(),
+            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
             'poem_id':poem_id,
         },
         success: function (response) {

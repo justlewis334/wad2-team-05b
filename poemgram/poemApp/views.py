@@ -34,6 +34,7 @@ def landingPage(request):
         contextDict["title"]=mostLiked.title
         contextDict["rows"]=mostLiked.text.split("\n")
         contextDict["author"]=mostLiked.user.username
+        contextDict["obj"] = mostLiked
     return render(request,'poemApp/landingPage.html', context=contextDict)
 
 def login(request):
@@ -129,9 +130,9 @@ def poem_like_unlike(request):
     user = request.user
     # Request must be POST
     if request.method == "POST":
-        poem_id = request.POST.get('articleTitle')  # What uniquely identifies a poem in the DB?
+        poem_id = request.POST.get('poem_id')
         poem = Poem.objects.get(id=poem_id)
-        user_prof = UserProfile.objects.get(user=user)
+        user_prof = User.objects.get(username=user)
 
         if user_prof in poem.likes.all():
             poem.likes.remove(user_prof)
@@ -153,7 +154,7 @@ def poem_like_unlike(request):
 
         data = {
             'value': like.value,
-            'likes': poem.likes.all().count
+            'likes': poem.likes.all().count()
         }
         return JsonResponse(data, safe=False)
-    return redirect('poemApp/poem.html')  # Also look at this <<<<< / Likely needs to be in 'poem:x' format
+    return JsonResponse({'success': 'false'})
