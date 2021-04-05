@@ -10,7 +10,7 @@ $( function() {
 	$.validator.setDefaults({ 
 		ignore: [],
 	});
-	$( "#textArea" ).hide();
+	//$( "#textArea" ).hide();
 	$( "#fakeTitle" ).hide();
 	let sortable1 = $( "#sortable1" );
 	let sortable2= $( "#sortable2" );
@@ -18,6 +18,8 @@ $( function() {
 	let input = $( "#textArea" );
 	// these are needed for performance
 	let childList = $("#sortable1 li");
+	let li = document.createElement("li")
+	//let $li = $("<li class='ui-sortable-handle wordcard'/>")
 	
 	
 	$( "#sortable1, #sortable2" ).sortable({
@@ -77,14 +79,11 @@ $( function() {
 	$("#rnd").click(function () {
 		// the first child is the helpbox
 		if (childList.length>1){
-			let random = getRndInteger(1, childList.length);
-			let newtext = childList.eq(random)[0].innerText;
-			childList.eq(random).remove();
-			childList = $("#sortable1 li");
-			let $li = $("<li class='ui-sortable-handle wordcard'/>").text(newtext);
-			sortable2.append($li);
-			sortable2.sortable('refresh');
-			input.val( input.val() + newtext +" " );
+			let ele = childList.eq(getRndInteger(1, childList.length)).detach()
+			//let newtext = childList.eq(random)[0].innerText;
+			sortable2.append(ele);
+			childList = $("#sortable1 li");			
+			input.val( input.val() + ele[0].innerText +" " );
 			canBreak=true;
 		}
 	});
