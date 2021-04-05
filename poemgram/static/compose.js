@@ -10,16 +10,13 @@ $( function() {
 	$.validator.setDefaults({ 
 		ignore: [],
 	});
-	//$( "#textArea" ).hide();
+	$( "#textArea" ).hide();
 	$( "#fakeTitle" ).hide();
 	let sortable1 = $( "#sortable1" );
 	let sortable2= $( "#sortable2" );
 	let canBreak=false;
 	let input = $( "#textArea" );
-	// these are needed for performance
 	let childList = $("#sortable1 li");
-	let li = document.createElement("li")
-	//let $li = $("<li class='ui-sortable-handle wordcard'/>")
 	
 	
 	$( "#sortable1, #sortable2" ).sortable({
@@ -80,7 +77,6 @@ $( function() {
 		// the first child is the helpbox
 		if (childList.length>1){
 			let ele = childList.eq(getRndInteger(1, childList.length)).detach()
-			//let newtext = childList.eq(random)[0].innerText;
 			sortable2.append(ele);
 			childList = $("#sortable1 li");			
 			input.val( input.val() + ele[0].innerText +" " );
