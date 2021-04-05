@@ -86,8 +86,8 @@ def compose(request):
         contextDict={}
         contextDict["text"]=[]
         contextDict["title"]=request.GET.get("title")
-        for i in re.split(",| |_|\?|\n|\.|!", request.GET.get("text")):
-            contextDict["text"].append(i)
+        contextDict["text"]=re.findall(r'\w+', request.GET.get("text"))
+        random.shuffle(contextDict["text"])
         return render(request,'poemApp/compose.html', context=contextDict)
     
 @login_required

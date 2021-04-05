@@ -10,14 +10,12 @@ Compose
 	<ul id="sortable1" class="jumbotron panel-jumbotron cardContainer spaceBetween verticalScroll" >	
 		<li class=" wide anchor sadsa"><p align="center" class="anchor">Press enter to break line <br/>Words:</p></li>
 		{% for i in text %}
-			<li class="wordcard">
-			{{i}}
-			</li>
+			<li class="wordcard">{{i}}</li>
 		{% endfor %}
 	</ul>
 
 	
-	<div class="vl" ></div>
+	<div class="vl hidden-xs" ></div>
 	
 	
 	<ul id="sortable2" class="jumbotron wide-jumbotron overflow-auto cardContainer" style="list-style-type:none;"></ul>
@@ -38,7 +36,7 @@ Compose
 		{% csrf_token %}
 		<!-- two separate title inputs are needed because jQuery is dummy-->
 		<input hidden  name="title" id="title"/>
-		<textarea id="poem" name="poem" value="" ></textarea>
+		<textarea  id="textArea" name="poem" value="" ></textarea>
 	</form>
 	
 	

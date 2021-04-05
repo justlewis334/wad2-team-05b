@@ -10,13 +10,14 @@ $( function() {
 	$.validator.setDefaults({ 
 		ignore: [],
 	});
-	
-	$( "#poem" ).hide();
+	$( "#textArea" ).hide();
 	$( "#fakeTitle" ).hide();
 	let sortable1 = $( "#sortable1" );
 	let sortable2= $( "#sortable2" );
 	let canBreak=false;
-	let input = $( "#poem" );
+	let input = $( "#textArea" );
+	// these are needed for performance
+	let childList = $("#sortable1 li");
 	
 	
 	$( "#sortable1, #sortable2" ).sortable({
@@ -32,6 +33,7 @@ $( function() {
 		items: ["li:not(.wordcard)", "li:not(.break)"],
 		receive: function( event, ui ) {
 			input.val( input.val() + ui.item.text()+" " );
+			childList = $("#sortable1 li")
 			canBreak=true;
 			
 		},
@@ -74,11 +76,12 @@ $( function() {
 	
 	$("#rnd").click(function () {
 		// the first child is the helpbox
-		if (sortable1.children().length>1){
-			let random = getRndInteger(1, sortable1.children().length);
-			let newtext = sortable1.children().eq(random)[0].innerText;
-			sortable1.children().eq(random).remove();
-			let $li = $("<li class='ui-state-default wordcard'/>").text(newtext);
+		if (childList.length>1){
+			let random = getRndInteger(1, childList.length);
+			let newtext = childList.eq(random)[0].innerText;
+			childList.eq(random).remove();
+			childList = $("#sortable1 li");
+			let $li = $("<li class='ui-sortable-handle wordcard'/>").text(newtext);
 			sortable2.append($li);
 			sortable2.sortable('refresh');
 			input.val( input.val() + newtext +" " );

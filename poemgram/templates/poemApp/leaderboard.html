@@ -1,3 +1,5 @@
+{% load getSlug from poemApp_template_tags %}
+
 <div class="jumbotron panel-jumbotron overflow-auto">
 	<h3>{{name}}
 	{% if author %}
@@ -5,8 +7,8 @@
 	{% endif %}
 	</h3>
 	<hr/>
-	{% getSlug i.user as obj %}
 	{% for i in poems %}
+		{% getSlug i.user as obj %}
 		{{forloop.counter}}. "{{i.title}}" by <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ i.user.username }}</a>
 	<hr/>
 	{% empty %}
