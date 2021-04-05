@@ -1,0 +1,19 @@
+{%load  staticfiles  %}
+
+<form action="{% url 'poemApp:like' %}" method="post" class="like-form" id="{{obj.id}}">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{obj.id}}">
+    <button type="submit" class="ui button like-button{{obj.id}}">
+        {% if user not in obj.likes.all %}
+        Like
+        {% else %}
+        Dislike
+        {% endif %}
+    </button>
+
+    <div class="like-count{{obj.id}}">{{obj.total_likes}}</div>
+    likes
+
+</form>
+
+<script src="{% static 'likes.js' %}"} ></script>

@@ -26,7 +26,7 @@ SECRET_KEY = "not today"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wad2team05b.eu.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition

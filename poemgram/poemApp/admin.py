@@ -1,6 +1,5 @@
 from django.contrib import admin
-from poemApp.models import Poem, Comment, Like
-from poemApp.models import UserProfile
+from poemApp.models import Poem, Comment, Like, UserProfile
 
 admin.site.register(Poem)
 admin.site.register(Comment)

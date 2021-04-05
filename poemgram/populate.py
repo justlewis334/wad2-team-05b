@@ -31,7 +31,6 @@ def populate():
 
     poems = [
         {'title': 'poem1',
-         'user': 'test',
          'articletitle': 'title1',
          'text': 'text1'},
         # {'title': 'poem2',
@@ -55,6 +54,10 @@ def populate():
         #  'articletitle': 'title1',
         #  'text': 'text1'},
 
+    ]
+
+    comments = [
+        {}
     ]
 
     for user in users:
