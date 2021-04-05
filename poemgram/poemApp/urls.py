@@ -15,4 +15,5 @@ urlpatterns = [
     path('submitPoem/', views.submitPoem, name='submitPoem'),
     path('precompose/', views.preCompose, name='precompose'),
     path('like/', views.poem_like_unlike, name='like-poem'),
+    path('poem/<slug:poemSlug>', views.poem, name='poem'),
 ]

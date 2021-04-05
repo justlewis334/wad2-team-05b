@@ -23,7 +23,6 @@ def index(request):
         contextDict["rtitle"]=randPoem.title
         contextDict["rrows"]=randPoem.text.split("\n")
         contextDict["rauthor"]=randPoem.user.username
-        contextDict["obj"] = randPoem
     contextDict["recent"]=Poem.objects.order_by("-addedDate")[:8]
     contextDict["mostLikes"]=Poem.objects.order_by("-likes")[:8]
     return render(request,'poemApp/index.html', context=contextDict)
@@ -50,7 +49,6 @@ def showUserprofile(request, usernameSlug):
     try:
         contextDict["user"]= UserProfile.objects.get(slug=usernameSlug).user
         contextDict["poems"] = Poem.objects.filter(user=contextDict["user"])
-        contextDict["obj"] = Poem.objects
     except:
         contextDict["user"]= None
         contextDict["poems"]= None
@@ -104,6 +102,11 @@ def search(request):
         contextDict["list"]= User.objects.filter(username__icontains=request.GET.get('search'))
 
     return render(request,'poemApp/searchResult.html', context=contextDict)
+
+@login_required
+def poem(request):
+    contextDict={}
+    return render(request, "poemApp/poemPage.html", context=contextDict)
 
 @login_required
 def submitPoem(request):

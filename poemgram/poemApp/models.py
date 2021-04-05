@@ -58,7 +58,7 @@ class Comment(models.Model):
     # There isn't a good solution for on_delete
     # The "right" way to do it is that when a comment is deleted, only the text/username gets deleted
     # This way, the comment chain gets preserved
-    replyTo = models.ForeignKey("self", on_delete=models.SET_DEFAULT, default=-1, related_name="comment")
+    replyTo = models.ForeignKey("self", on_delete=models.SET_DEFAULT, default=-1, null=True, related_name="comment")
 
     @property
     def total_likes(self):
