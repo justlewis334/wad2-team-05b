@@ -15,7 +15,7 @@ import random
 import re
 
 
-
+#this is the view of the index page, the intial page when opening the app
 @login_required
 def index(request):
     contextDict={}
@@ -28,6 +28,7 @@ def index(request):
     contextDict["mostLikes"]=Poem.objects.order_by("-likes")[:8]
     return render(request,'poemApp/index.html', context=contextDict)
 
+#this is the view of the landing page 
 def landingPage(request):
     mostLiked = Poem.objects.order_by("-likes").first()
     contextDict={}
@@ -37,7 +38,7 @@ def landingPage(request):
         contextDict["author"]=mostLiked.user.username
         contextDict["obj"] = mostLiked
     return render(request,'poemApp/landingPage.html', context=contextDict)
-
+#view for login page 
 def login(request):
     return render(request,'poemApp/loginPage.html')
 
@@ -103,7 +104,7 @@ def search(request):
         contextDict["list"]= User.objects.filter(username__icontains=request.GET.get('search'))
 
     return render(request,'poemApp/searchResult.html', context=contextDict)
-
+#the view for the poem page 
 @login_required
 def poem(request, poemSlug):
     contextDict={}
