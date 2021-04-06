@@ -31,6 +31,7 @@ class MyRegistrationView(RegistrationView):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('poemApp/', include(('poemApp.urls', 'poemApp'), namespace="poemApp")),
+    path('', RedirectView.as_view(url="poemApp/index/"), name='index'),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('/favicon.png'))),
     path('accounts/register/', MyRegistrationView.as_view(), name="registration_register"),
     path('accounts/', include('registration.backends.simple.urls')),

@@ -15,7 +15,7 @@
 		<div class="jumbotron wide-jumbotron overflow-auto">
             <h3>Most recent</h3>
 			<hr/>
-			{% for i in poem %}
+			{% for i in poems %}
 				{{forloop.counter}}. "{{i.title}}"  
 				<hr/>
 			{% empty %}
