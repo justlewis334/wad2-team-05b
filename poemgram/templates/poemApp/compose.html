@@ -35,6 +35,7 @@ Compose
 	<form action="{% url 'poemApp:submitPoem' %}" method="post" id="submitForm">
 		{% csrf_token %}
 		<!-- two separate title inputs are needed because jQuery is dummy-->
+		<input hidden  name="articleTitle" id="articleTitle" value="{{title}}" />
 		<input hidden  name="title" id="title"/>
 		<textarea  id="textArea" name="poem" value="" ></textarea>
 	</form>

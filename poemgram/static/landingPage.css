@@ -65,6 +65,10 @@ h3{
 	width: 100%;
 }
 
+.80wide{
+	width: 80%;
+}
+
 .spaceBetween{
 	justify-content: space-between;
 }
@@ -103,4 +107,8 @@ h3{
 
 .notResizeable { 
 	resize: none;
+}
+
+.comment{
+	background-color: white;
 }

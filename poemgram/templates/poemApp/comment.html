@@ -1,0 +1,11 @@
+{%load  staticfiles  %}
+{% load getSlug from poemApp_template_tags %}
+
+<div class="jumbotron-fluid comment">
+	{% getSlug comment.user as obj %}
+	<h4>By: <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ comment.user.username }}</a><h4>
+	<p>{{comment.text}}</p>
+	{% include "poemApp/likebutton.html" with obj=comment type="comment" %}
+</div>
+
+

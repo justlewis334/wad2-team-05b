@@ -6,24 +6,34 @@
 {% endblock %}
 
 {% block body_block %}
-	{% if user %}
+	{% if poem %}
         <div class="jumbotron panel-jumbotron text-center">
-            {% include "poemApp/poem.html" with author=rauthor rows=rrows title=rtitle  %}
+            {% include "poemApp/poem.html" with author=poem.user.username rows=rows title=poem.title  %}
+			{% include "poemApp/likebutton.html" with obj=poem type="poem" %}
         </div>
 		<div class="vl hidden-xs"></div>
 		<div class="jumbotron wide-jumbotron overflow-auto">
-            <textarea></textarea>
+			<form action="{% url 'poemApp:submitComment' %}"  method="post" id="parentcomment">
+				{% csrf_token %}
+				<div class="input-group">
+					<textarea required placeholder="Leave a comment"  class="form-control notResizeable" name="text" id="text"></textarea>
+					<div class="input-group-append">
+						<button class="btn btn-primary" type="submit" value="Submit" id="submit" type="button">Submit</button>
+					</div>
+				</div>
+				<input hidden name="poem" value="{{poem.id}}">
+			</form>
 			<hr/>
-			{% for i in poem %}
-				{{forloop.counter}}. "{{i.title}}" by {{i.text}} 
-				<hr/>
-			{% empty %}
-				<strong>This user did not upload any poems yet </strong>
+			{% for i in comments %}
+				{% include "poemApp/comment.html" with comment=i  %}
 			{% endfor %}
         </div>
 	{% else %}
 		<div class="jumbotron panel-jumbotron text-center">
-            <h3>There is no such user</h3>
+            <h3>There is no such poem</h3>
         </div>
 	{% endif %}
+	
+
+<script src="{% static 'likes.js' %}" url="{% url 'poemApp:like' %}" ></script>
 {% endblock %}

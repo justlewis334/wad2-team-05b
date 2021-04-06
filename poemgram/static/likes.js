@@ -1,38 +1,29 @@
-const thisScript = document.currentScript;
+let thisScript = document.currentScript;
 
-$('.like-form').submit(function(e){
-    e.preventDefault()
+$( function() {
 
-    const poem_id = $(this).attr('id')
 
-    const likeText = $(`.like-button${poem_id}`).text()
-    const trim = $.trim(likeText)
-    const url = $(this).attr('action')
-
-    let res;
-    const likes = $(`.like-count${poem_id}`).text()
-    const trimCount = parseInt(likes)
-
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: {
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-            'poem_id':poem_id,
-        },
-        success: function (response) {
-            if(trim === 'Dislike') {
-                $(`.like-button${poem_id}`).text('Like')
-                res = trimCount - 1
-            } else {
-                $(`.like-button${poem_id}`).text('Dislike')
-                res = trimCount + 1
-            }
-            $(`.like-count${poem_id}`).text(res)
-        },
-        error: function (error) {
-            console.log(error);
-            alert("An error occurred.");
-        }
-    })
+	$(".like-button").click(function() {
+		let submitButton=$(this);
+		let obj_id = submitButton.attr("id");
+		let type = submitButton.attr("name");
+		let likeText = submitButton.text();
+		$.ajax({
+			type: 'POST',
+			url: thisScript.getAttribute("url"),
+			headers: {'X-CSRFToken': Cookies.get('csrftoken')},
+			data: {
+				'obj_id': obj_id,
+				'type': type,
+			},
+			success: function (response) {
+				res = response["likes"];
+				submitButton.text(response["newStatus"])
+				$("#"+obj_id+type+"0").text(res)
+			},
+			error: function (error) {
+				console.log(error);
+				alert("An error occurred.");
+			}
+    })})
 })

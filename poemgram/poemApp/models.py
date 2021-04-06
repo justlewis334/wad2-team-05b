@@ -4,13 +4,17 @@ from django.template.defaultfilters import slugify
 from django_extensions.db.fields import AutoSlugField
 
 
+
+
 class UserProfile(models.Model):
     # I don't know about default 1, but it shouldn't be important anyways 
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=1)
+    about =  models.TextField(null=True)
     slug=AutoSlugField(populate_from='user__username', slugify_function=slugify)
 
     def __str__(self):
         return self.slug
+
 
     
 class Poem(models.Model):
@@ -24,7 +28,7 @@ class Poem(models.Model):
 
     @classmethod
     def create(cls, title, user, text, articleTitle=None):
-        return cls(title=title, user=user, text=text, articleTitle=articleTitle, likes=0)
+        return cls(title=title, user=user, text=text, articleTitle=articleTitle)
 
     @property
     def total_likes(self):
@@ -34,19 +38,6 @@ class Poem(models.Model):
         return self.articleTitle
 
 
-LIKE_CHOICES = (
-    ('Like', 'Like'),
-    ('Dislike', 'Dislike'),
-)
-
-
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    poem = models.ForeignKey(Poem, on_delete=models.CASCADE)
-    value = models.CharField(choices=LIKE_CHOICES, default='Like', max_length=10)
-
-    def __str__(self):
-        return str(self.poem)
 
 
 class Comment(models.Model):
@@ -63,6 +54,11 @@ class Comment(models.Model):
     @property
     def total_likes(self):
         return self.likes.all().count()
+    
+    @classmethod
+    def create(cls, poem, user, text, replyTo=None):
+        return cls(poem=poem, user=user, text=text, replyTo=None)
+
 
     def __str__(self):
         return self.text

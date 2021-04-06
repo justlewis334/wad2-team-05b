@@ -17,7 +17,7 @@ Search results
 		{% getSlug i.user as obj %}
 		<hr/>
 		<div>
-			{{ i.title }} by <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ i.user.username }}</a>
+			<a href="{% url 'poemApp:poem' i.slug  %}">{{i.title}}</a> by <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ i.user.username }}</a>
 		</div>
 		{% empty %}
 			<hr/>

@@ -10,7 +10,7 @@ Index
 		<!--TODO: Add links to the list (or make them in the first place...)-->
         <div class="jumbotron panel-jumbotron text-center">
             <h3>Random poem</h3>
-			{% include "poemApp/poem.html" with author=rauthor rows=rrows title=rtitle  %}
+			{% include "poemApp/poem.html" with author=randPoem.user.username rows=rrows title=randPoem.title  %}
         </div>
 		<div class="vl"></div>
 			{% include "poemApp/leaderboard.html" with name="Most recent" poems=recent only %}

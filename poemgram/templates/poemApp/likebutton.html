@@ -1,9 +1,7 @@
 {%load  staticfiles  %}
 
-<form action="{% url 'poemApp:like' %}" method="post" class="like-form" id="{{obj.id}}">
-    {% csrf_token %}
-    <input type="hidden" name="id" value="{{obj.id}}">
-    <button type="submit" class="ui button like-button{{obj.id}}">
+<div class="container">
+    <button id="{{obj.id}}" name="{{type}}"  type="submit" class="btn btn-primary btn-sm like-button">
         {% if user not in obj.likes.all %}
         Like
         {% else %}
@@ -11,9 +9,8 @@
         {% endif %}
     </button>
 
-    <div class="like-count{{obj.id}}">{{obj.total_likes}}</div>
+    <div id="{{obj.id}}{{type}}0" class="like-count{{obj.id}}{{type}}">{{obj.total_likes}}</div>
     likes
 
-</form>
+</div>
 
-<script src="{% static 'likes.js' %}"} ></script>

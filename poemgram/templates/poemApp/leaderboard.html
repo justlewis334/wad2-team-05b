@@ -1,3 +1,4 @@
+{%load  staticfiles  %}
 {% load getSlug from poemApp_template_tags %}
 
 <div class="jumbotron panel-jumbotron overflow-auto">
@@ -9,7 +10,7 @@
 	<hr/>
 	{% for i in poems %}
 		{% getSlug i.user as obj %}
-		{{forloop.counter}}. "{{i.title}}" by <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ i.user.username }}</a>
+		{{forloop.counter}}. <a href="{% url 'poemApp:poem' i.slug  %}">{{i.title}}</a> by <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ i.user.username }}</a>
 	<hr/>
 	{% empty %}
 	<strong> There are no poems present :( </strong>

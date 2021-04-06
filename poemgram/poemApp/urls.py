@@ -4,7 +4,7 @@ from django.urls import include
 from poemApp import views
 
 urlpatterns = [
-    path('', views.landingPage, name='landingPage'),
+    path('poemApp', views.landingPage, name='landingPage'),
     path('about/', views.about, name='about'),
     path('index/', views.index, name='index'),
     path('login/', views.login, name='login'),
@@ -14,6 +14,7 @@ urlpatterns = [
     path('compose/', views.compose, name='compose'),
     path('submitPoem/', views.submitPoem, name='submitPoem'),
     path('precompose/', views.preCompose, name='precompose'),
-    path('like/', views.poem_like_unlike, name='like-poem'),
+    path('like/', views.like_unlike, name='like'),
     path('poem/<slug:poemSlug>', views.poem, name='poem'),
+    path('submitComment/', views.submitComment, name='submitComment'),
 ]

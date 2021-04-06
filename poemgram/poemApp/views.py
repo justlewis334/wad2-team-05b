@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from poemApp.models import Poem, UserProfile, Like
+from poemApp.models import Poem, UserProfile, Comment
 from django.views.generic.list import ListView
 from django.shortcuts import redirect
 from django.urls import reverse
 from urllib.parse import urlencode
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 # this was preinstalled for me, if you need it, you can download it with "pip install requests"
 import requests
 import random
@@ -18,11 +19,11 @@ import re
 @login_required
 def index(request):
     contextDict={}
-    randPoem = random.choice(Poem.objects.all())
-    if randPoem!=None:
-        contextDict["rtitle"]=randPoem.title
+    try:
+        contextDict["randPoem"]=randPoem = random.choice(Poem.objects.all())
         contextDict["rrows"]=randPoem.text.split("\n")
-        contextDict["rauthor"]=randPoem.user.username
+    except:
+        randPoem=None
     contextDict["recent"]=Poem.objects.order_by("-addedDate")[:8]
     contextDict["mostLikes"]=Poem.objects.order_by("-likes")[:8]
     return render(request,'poemApp/index.html', context=contextDict)
@@ -49,6 +50,7 @@ def showUserprofile(request, usernameSlug):
     try:
         contextDict["user"]= UserProfile.objects.get(slug=usernameSlug).user
         contextDict["poems"] = Poem.objects.filter(user=contextDict["user"])
+        contextDict["about"]= UserProfile.objects.get(slug=usernameSlug).about
     except:
         contextDict["user"]= None
         contextDict["poems"]= None
@@ -84,7 +86,6 @@ def compose(request):
         return preCompose(request)
     else:
         contextDict={}
-        contextDict["text"]=[]
         contextDict["title"]=request.GET.get("title")
         contextDict["text"]=re.findall(r'\w+', request.GET.get("text"))
         random.shuffle(contextDict["text"])
@@ -104,13 +105,20 @@ def search(request):
     return render(request,'poemApp/searchResult.html', context=contextDict)
 
 @login_required
-def poem(request):
+def poem(request, poemSlug):
     contextDict={}
+    try:
+        contextDict["poem"]= Poem.objects.get(slug=poemSlug)
+        contextDict["rows"]= Poem.objects.get(slug=poemSlug).text.split("\n")
+        contextDict["comments"] = Comment.objects.filter(poem=contextDict["poem"])
+    except:
+        contextDict["poem"]= None
+        contextDict["rows"]= None
     return render(request, "poemApp/poemPage.html", context=contextDict)
 
 @login_required
 def submitPoem(request):
-    p=Poem.create(request.POST.get("title"), request.user, request.POST.get("poem"), "asdsada")
+    p=Poem.create(request.POST.get("title"), request.user, request.POST.get("poem"), request.POST.get("articleTitle"))
     p.save()
     return redirect("/poemApp/index")
     
@@ -131,35 +139,37 @@ def checkUserName(request):
 
 
 @login_required
-def poem_like_unlike(request):
-    user = request.user
+def like_unlike(request):
     # Request must be POST
     if request.method == "POST":
-        poem_id = request.POST.get('poem_id')
-        poem = Poem.objects.get(id=poem_id)
-        user_prof = User.objects.get(username=user)
-
-        if user_prof in poem.likes.all():
-            poem.likes.remove(user_prof)
+        obj_id = request.POST.get('obj_id')
+        # request.user is the actual record, not just an username
+        user_prof = request.user
+        if request.POST.get('type')=="poem":
+            obj = Poem.objects.get(id=obj_id)
         else:
-            poem.likes.add(user_prof)
+            obj = Comment.objects.get(id=obj_id)
 
-        like, created = Like.objects.get_or_create(user=user_prof, poem_id=poem_id)
-
-        if not created:
-            if like.value == 'Like':
-                like.value = 'Dislike'
-            else:
-                like.value = 'Like'
+        if user_prof in obj.likes.all():
+            obj.likes.remove(user_prof)
+            newStatus="Like"
         else:
-            like.value = 'Like'
-
-            poem.save()
-            like.save()
+            obj.likes.add(user_prof)
+            newStatus="Dislike"
 
         data = {
-            'value': like.value,
-            'likes': poem.likes.all().count()
+            'likes': obj.likes.all().count(),
+            'newStatus': newStatus
         }
+        
         return JsonResponse(data, safe=False)
     return JsonResponse({'success': 'false'})
+
+@login_required
+def submitComment(request):
+    if request.method == "POST":
+        print(request.POST.get("poem"))
+        print(request.POST.get("text"))
+        newComment = Comment.create(Poem.objects.get(id=int(request.POST.get("poem"))), request.user,  request.POST.get("text"))
+        newComment.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

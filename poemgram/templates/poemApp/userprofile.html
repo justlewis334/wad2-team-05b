@@ -7,8 +7,9 @@
 
 {% block body_block %}
 	{% if user %}
-        <div class="jumbotron panel-jumbotron text-center">
+        <div class="jumbotron panel-jumbotron text-center autoscroll">
             <h3>{{user.username}}</h3>
+			<p>{{about}}</p>
         </div>
 		<div class="vl hidden-xs"></div>
 		<div class="jumbotron wide-jumbotron overflow-auto">
