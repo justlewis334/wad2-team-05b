@@ -1,16 +1,14 @@
 {%load  staticfiles  %}
 
-<div class="container">
-    <button id="{{obj.id}}" name="{{type}}"  type="submit" class="btn btn-primary btn-sm like-button">
+<div class="btn-toolbar" role="group">
+	<div class="btn-group">
+		<button id="{{obj.id}}{{type}}0" type="button" disabled class="btn btn-outline-primary">{{obj.total_likes}}</button>
+		<button id="{{obj.id}}" name="{{type}}"  type="submit" class="btn btn-primary btn-sm like-button">
         {% if user not in obj.likes.all %}
-        Like
+			Like
         {% else %}
-        Dislike
+			Dislike
         {% endif %}
-    </button>
-
-    <div id="{{obj.id}}{{type}}0" class="like-count{{obj.id}}{{type}}">{{obj.total_likes}}</div>
-    likes
-
+		</button>
+	</div>
 </div>
-

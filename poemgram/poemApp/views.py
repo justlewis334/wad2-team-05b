@@ -104,6 +104,9 @@ def search(request):
         contextDict["list"]= User.objects.filter(username__icontains=request.GET.get('search'))
 
     return render(request,'poemApp/searchResult.html', context=contextDict)
+
+
+
 #the view for the poem page 
 @login_required
 def poem(request, poemSlug):
@@ -111,7 +114,7 @@ def poem(request, poemSlug):
     try:
         contextDict["poem"]= Poem.objects.get(slug=poemSlug)
         contextDict["rows"]= Poem.objects.get(slug=poemSlug).text.split("\n")
-        contextDict["comments"] = Comment.objects.filter(poem=contextDict["poem"])
+        contextDict["parentcomments"] = Comment.objects.filter(poem=contextDict["poem"]).filter(replyTo=None)
     except:
         contextDict["poem"]= None
         contextDict["rows"]= None
@@ -169,8 +172,10 @@ def like_unlike(request):
 @login_required
 def submitComment(request):
     if request.method == "POST":
-        print(request.POST.get("poem"))
-        print(request.POST.get("text"))
-        newComment = Comment.create(Poem.objects.get(id=int(request.POST.get("poem"))), request.user,  request.POST.get("text"))
+        print(request.POST.get("replyto"))
+        if request.POST.get("replyto")=="parentcomment":
+            newComment = Comment.create(Poem.objects.get(id=int(request.POST.get("poem"))), request.user,  request.POST.get("text"))
+        else:
+            newComment = Comment.create(Poem.objects.get(id=int(request.POST.get("poem"))), request.user,  request.POST.get("text"), Comment.objects.get(id=int(request.POST.get("replyto")[1:])))
         newComment.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

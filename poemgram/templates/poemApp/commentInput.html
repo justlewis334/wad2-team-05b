@@ -1,0 +1,13 @@
+{%load  staticfiles  %}
+
+<form action="{% url 'poemApp:submitComment' %}"  method="post" id="submitComment">
+	{% csrf_token %}
+		<div class="input-group">
+		<textarea required placeholder="Leave a comment"  class="form-control notResizeable" name="text" id="text"></textarea>
+		<div class="input-group-append">
+			<button class="btn btn-primary" type="submit" value="Submit" id="submit" type="button">Submit</button>
+		</div>
+		</div>
+	<input hidden name="replyto" value="{{parentID}}" id="replyto">
+	<input hidden name="poem" value="{{poem.id}}">
+</form>

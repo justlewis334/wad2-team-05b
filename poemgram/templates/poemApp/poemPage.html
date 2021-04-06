@@ -1,5 +1,6 @@
 {% extends 'poemApp/base.html' %}
 {%load  staticfiles  %}
+{% load getReplies from poemApp_template_tags %}
 
 {% block title_block %}
 {{user.username}}
@@ -13,19 +14,15 @@
         </div>
 		<div class="vl hidden-xs"></div>
 		<div class="jumbotron wide-jumbotron overflow-auto">
-			<form action="{% url 'poemApp:submitComment' %}"  method="post" id="parentcomment">
-				{% csrf_token %}
-				<div class="input-group">
-					<textarea required placeholder="Leave a comment"  class="form-control notResizeable" name="text" id="text"></textarea>
-					<div class="input-group-append">
-						<button class="btn btn-primary" type="submit" value="Submit" id="submit" type="button">Submit</button>
-					</div>
-				</div>
-				<input hidden name="poem" value="{{poem.id}}">
+			{% include "poemApp/commentInput.html" with parentID="parentcomment" poem=poem %}
 			</form>
 			<hr/>
-			{% for i in comments %}
-				{% include "poemApp/comment.html" with comment=i  %}
+			{% for i in parentcomments %}
+				{% include "poemApp/comment.html" with comment=i only %}
+				{% getReplies i as clist %}
+				{% for j in clist %}
+					{% include "poemApp/comment.html" with comment=j reply="True" %}
+				{% endfor %}
 			{% endfor %}
         </div>
 	{% else %}

@@ -1,11 +1,22 @@
 {%load  staticfiles  %}
 {% load getSlug from poemApp_template_tags %}
 
-<div class="jumbotron-fluid comment">
+{% if reply %}
+<div class="container justify-content-end">
+{% endif %}
+<div class="comment {% if reply %}w-75{% endif %}">
 	{% getSlug comment.user as obj %}
-	<h4>By: <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ comment.user.username }}</a><h4>
-	<p>{{comment.text}}</p>
+	<p>By: <a href="{% url 'poemApp:showUserprofile' obj  %}">{{ comment.user.username }}</a><p> 
 	{% include "poemApp/likebutton.html" with obj=comment type="comment" %}
+	<div class="pt-1 wide"></div>
+	<p class="wide disp">{{comment.text}}</p>
+	<div class="break"></div>
+	<input id="b{{comment.id}}" username="{{ comment.user.username }}" value="Reply" type="submit" class="btn btn-primary btn-sm reply"/>
 </div>
+{% if reply %}
+</div>
+{% endif %}
+
+
 
 

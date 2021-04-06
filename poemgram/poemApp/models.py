@@ -57,8 +57,12 @@ class Comment(models.Model):
     
     @classmethod
     def create(cls, poem, user, text, replyTo=None):
-        return cls(poem=poem, user=user, text=text, replyTo=None)
+        return cls(poem=poem, user=user, text=text, replyTo=replyTo)
 
+    @property
+    def get_id(self):
+        return str(self.id)
+    
 
     def __str__(self):
         return self.text

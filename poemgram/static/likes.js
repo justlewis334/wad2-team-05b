@@ -25,5 +25,10 @@ $( function() {
 				console.log(error);
 				alert("An error occurred.");
 			}
-    })})
+    })});
+	
+	$(".reply").click(function() {
+		$("#replyto").val($(this).attr("id"));
+		$("#text").attr("placeholder", "Replying to: "+ $(this).attr("username"))
+	})
 })
